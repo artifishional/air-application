@@ -9,7 +9,7 @@ import webpackConfig from "../webpack.config.js"
 
 const units = [];
 
-let m2units = selfpkg.m2units;
+let m2units = selfpkg.m2units || {};
 units.push(...Object.keys(m2units).map( key => ({ name: key, npm: m2units[key] }) ));
 
 webpack( webpackConfig ).run(function (err) {
