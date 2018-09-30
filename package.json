@@ -8,6 +8,9 @@
     "patch": "npm version patch && npm publish && git push origin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "air-application": "./bin/server.mjs"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/artifishional/air-application.git"
