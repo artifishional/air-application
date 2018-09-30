@@ -12,7 +12,7 @@ function onload() {
 }
 
 const modelschema = new ModelSchema( {
-    schema: [ "$", {source: {path: "./gamex-master"}} ,
+    schema: [ "$", {source: {path: "./master"}} ,
         [ "locale", {id: "locale", source: () => stream(emt => emt("en")),} ],
         [ "currency", {id: "currency", source: () => stream(emt => emt("usd")), } ],
     ],
@@ -22,7 +22,7 @@ onload().at( function () {
 
     const scene = new SceneSchema({
         viewbuilder: (...argv) => new View2(...argv),
-        schema: [ "$", {source: {path: "./gamex-master-view", schtype: "html"}} ],
+        schema: [ "$", {source: {path: "./master", schtype: "html"}} ],
     });
 
     scene.obtain("", { modelschema: modelschema.get() }).at( ({action: name, node}) => {
