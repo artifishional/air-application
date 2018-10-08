@@ -1,0 +1,29 @@
+{
+  "name": "air-application",
+  "version": "1.0.2",
+  "description": "",
+  "main": "src/m2.js",
+  "scripts": {
+    "minor": "npm version minor && npm publish && git push origin",
+    "patch": "npm version patch && npm publish && git push origin",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "air-application": "./bin/server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artifishional/air-application.git"
+  },
+  "dependencies": {
+    "air-html": "^0.1.10",
+    "air-m2": "^0.5.6",
+    "air-m2-builder": "^0.1.47"
+  },
+  "author": ".ai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artifishional/air-application/issues"
+  },
+  "homepage": "https://github.com/artifishional/air-application#readme"
+}
