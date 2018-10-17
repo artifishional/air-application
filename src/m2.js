@@ -26,7 +26,8 @@ onload().at( function () {
     });
 
     scene.obtain("", { modelschema: modelschema.get() }).at( ({action: name, node}) => {
-         document.body.append( node.target );
+        if(!document.querySelector("#schema-tree"))
+            document.body.append( node.target );
     } );
 
 } );
