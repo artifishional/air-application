@@ -1,6 +1,6 @@
 {
   "name": "air-application",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "src/m2.js",
   "scripts": {
