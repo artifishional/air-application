@@ -11,7 +11,7 @@ function onload() {
     });
 }
 
-const modelschema = new ModelSchema( {
+window.modelschema = new ModelSchema( {
     schema: [ "$", {source: {path: "./master"}} ,
         [ "locale", {id: "locale", source: () => stream(emt => emt("en")),} ],
         [ "currency", {id: "currency", source: () => stream(emt => emt("usd")), } ],
