@@ -12,7 +12,7 @@ function onload() {
 }
 
 window.modelschema = new ModelSchema( {
-    schema: [ "$", {source: {path: "./gamex-master"}} ,
+    schema: [ "$", {source: {path: "./master"}} ,
         [ "intl", {id: "intl", source: () => stream(emt => emt({ locale: "ru", currency: "rub" })),} ],
     ],
 } );
