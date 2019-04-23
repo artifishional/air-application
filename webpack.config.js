@@ -15,6 +15,7 @@ module.exports = [{
     target: 'web',
     plugins: [
         new HtmlWebpackPlugin({
+            inject: false,
             entryUnit: "master",
             title: 'm2',
             template: './src/m2.html'
