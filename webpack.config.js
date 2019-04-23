@@ -1,4 +1,4 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = [{
     mode: "development",
@@ -17,10 +17,10 @@ module.exports = [{
     },
     target: 'web',
     plugins: [
-        new CopyWebpackPlugin([
-            { from: `${__dirname}/fill`, to: './' },
-        ], {
-            copyUnmodified: true
-        }),
+        new HtmlWebpackPlugin({
+            entryUnit: "master",
+            title: 'm2',
+            template: './src/m2.html'
+        })
     ],
 }];

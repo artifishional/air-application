@@ -6,7 +6,7 @@
   "scripts": {
     "minor": "npm version minor && npm publish && git push origin",
     "patch": "npm version patch && npm publish && git push origin",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config webpack.config.js --mode development"
   },
   "bin": {
     "air-application": "./bin/server.mjs"
@@ -16,11 +16,12 @@
     "url": "git+https://github.com/artifishional/air-application.git"
   },
   "dependencies": {
-    "air-html": "^0.1.10",
-    "air-m2": "^0.5.6",
-    "air-m2-builder": "^0.1.47"
+    "air-m2": "https://github.com/artifishional/air-m2.git#v2-ref",
+    "air-schema": "https://github.com/artifishional/air-schema.git#v2-ref",
+    "air-m2-builder2": "^1.1.4",
+    "html-webpack-plugin": "^3.2.0"
   },
-  "author": ".ai",
+  "author": "ai.2019",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/artifishional/air-application/issues"
