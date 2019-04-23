@@ -1,8 +1,14 @@
-import * as m2 from "air-m2"
-import {SceneSchema, stream, keyF, ModelSchema, Render} from "air-m2"
-import { View as View2 } from "air-html"
+import { stream, ModelVertex, HTMLView, error } from "air-m2"
 
-window.__M2 = m2;
+const entry = document.currentScript.getAttribute("data-entry-unit") || "master";
+
+function get(_name) {
+    const [ , gets = null ] = window.location.href.split("?");
+    if(gets === null) return null;
+    const argv = gets.split("&").map( arg => arg.split("=") );
+    const exist = argv.find( ([name]) => name === _name );
+    return exist || null;
+}
 
 function onload() {
     return stream(function( emt ) {
@@ -11,22 +17,46 @@ function onload() {
     });
 }
 
-window.modelschema = new ModelSchema( {
-    schema: [ "$", {source: {path: "./master"}} ,
-        [ "intl", {id: "intl", source: () => stream(emt => emt({ locale: "ru", currency: "rub" })),} ],
-    ],
-} );
+let locale = (get("lang")||[, "en"])[1].toLocaleLowerCase();
+const currency = (get("currency") || [ , "usd"])[1].toLocaleLowerCase();
+
+const localesList = [ "ru", "en" ];
+
+if(!localesList.includes(locale)) {
+    locale = localesList[1];
+}
+
+const model = new ModelVertex( [ "$", {},
+    [ "intl", {id: "intl", source: () => stream((emt, { hook }) => {
+            let state = { locale, currency, localesList };
+            emt(state);
+            hook.add( ({action, locale}) => {
+                if(action === "changeLocale") {
+                    state = { ...state, locale };
+                    emt( state );
+                }
+            } );
+        }),} ],
+
+    [ "error", { id: "error", source: error } ],
+    [ "main", { use: [ {path: `./${entry}`} ] } ],
+],);
+
+window.model = model;
 
 onload().at( function () {
 
-    const scene = new SceneSchema({
-        viewbuilder: (...argv) => new View2(...argv),
-        schema: [ "$", {source: {path: "./master", schtype: "html"}} ],
-    });
+    const view = new HTMLView(
+        [ "$", { use: [ { path: `./${entry}`, schtype: "html" } ] } ],
+    );
 
-    scene.obtain("", { modelschema: modelschema.get() }).at( ({action: name, node}) => {
-        if(!document.querySelector("#schema-tree"))
-            document.body.append( node.target );
+    const ans = view.obtain("", {
+        $: {modelschema: model}
+    }).at( ([{target}]) => {
+        document.body.append( target );
+        console.info("complete");
     } );
+
+    window.MAIN = ans;
 
 } );

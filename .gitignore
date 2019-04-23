@@ -1,4 +1,5 @@
 .idea/
+/dist
 npm-debug.log
 node_modules/
 gamex-builder/bin/gamex-builder/dist/
