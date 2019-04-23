@@ -9,9 +9,6 @@
     "patch": "npm version patch && npm publish && git push origin",
     "build": "webpack --config webpack.config.js --mode development"
   },
-  "bin": {
-    "air-application": "./bin/server.mjs"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/artifishional/air-application.git"
