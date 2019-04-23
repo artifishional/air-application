@@ -8,9 +8,6 @@ module.exports = [{
     entry: {
         'm2': `${__dirname}/src/m2.js`,
     },
-    externals: {
-        "gsap": "window"
-    },
     output: {
         path: `${__dirname}/dist`,
         filename: `[name].js`
