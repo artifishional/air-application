@@ -4,7 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="UTF-8">
     <title>m2</title>
-    <script data-entry-unit = "<%= htmlWebpackPlugin.options.entryUnit %>" src = "m2.js"></script>
+    <% if (htmlWebpackPlugin.options.revision) { %>
+    <script revision="<%= htmlWebpackPlugin.options.revision %>" src = "m2.js?revision=<%= htmlWebpackPlugin.options.revision %>" data-entry-unit = "<%= htmlWebpackPlugin.options.entryUnit %>"></script>
+    <% } else { %>
+    <script src="m2.js" data-entry-unit = "<%= htmlWebpackPlugin.options.entryUnit %>"></script>
+    <% } %>
 </head>
 <body>
 
