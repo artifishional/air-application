@@ -14,8 +14,7 @@
     "url": "git+https://github.com/artifishional/air-application.git"
   },
   "dependencies": {
-    "air-m2": "https://github.com/artifishional/air-m2.git",
-    "air-schema": "https://github.com/artifishional/air-schema.git",
+    "air-m2": "^0.6.5",
     "air-m2-builder2": "^1.1.4",
     "html-webpack-plugin": "^3.2.0"
   },
