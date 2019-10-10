@@ -1,4 +1,4 @@
-import { stream, ModelVertex, HTMLView, error } from "air-m2"
+import { stream2 as stream , ModelVertex, HTMLView, error } from "air-m2"
 
 const entry = document.currentScript.getAttribute("data-entry-unit") || "master";
 
@@ -11,7 +11,7 @@ function get(_name) {
 }
 
 function onload() {
-    return stream(function( emt ) {
+    return stream(null, function( emt ) {
         window.document && window.document.readyState === "complete" && emt();
         window.addEventListener("load", emt);
     });
@@ -27,10 +27,10 @@ if(!localesList.includes(locale)) {
 }
 
 const model = new ModelVertex( [ "$", {},
-    [ "intl", {id: "intl", source: () => stream((emt, { hook }) => {
+    [ "intl", {id: "intl", source: () => stream(null, (emt, cnr) => {
             let state = { locale, currency, localesList };
             emt(state);
-            hook.add( ({action, locale}) => {
+            cnr.tocommand( ({action, locale}) => {
                 if(action === "changeLocale") {
                     state = { ...state, locale };
                     emt( state );
@@ -44,19 +44,17 @@ const model = new ModelVertex( [ "$", {},
 
 window.model = model;
 
-onload().at( function () {
+onload().connect( () => function () {
 
     const view = new HTMLView(
         [ "$", { use: [ { path: `./${entry}`, schtype: "html" } ] } ],
     );
 
-    const ans = view.obtain("", {
+    view.obtain("", {
         $: {modelschema: model}
-    }).at( ([{target}]) => {
+    }).connect( hook => ([{target}]) => {
         document.body.append( target );
         console.info("complete");
     } );
-
-    window.MAIN = ans;
 
 } );
